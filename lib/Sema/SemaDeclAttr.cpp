@@ -6577,6 +6577,13 @@ static void ProcessDeclAttribute(Sema &S, Scope *scope, Decl *D,
   case AttributeList::AT_XRayLogArgs:
     handleXRayLogArgsAttr(S, D, Attr);
     break;
+  case AttributeList::AT_NodeCppNoInstance:
+    handleSimpleAttribute<NodeCppNoInstanceAttr>(S, D, Attr);
+    break;
+  case AttributeList::AT_NodeCppMayExtend:
+    handleSimpleAttribute<NodeCppMayExtendAttr>(S, D, Attr);
+    break;
+
   }
 }
 

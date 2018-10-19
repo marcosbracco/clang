@@ -3213,3 +3213,28 @@ For more information see
 or `msvc documentation <https://docs.microsoft.com/pl-pl/cpp/cpp/selectany>`_.
 }];
 }
+
+def DocCatNodeCpp : DocumentationCategory<"Node-dot-cpp specifics"> {
+  let Content = [{
+Node-dot-cpp specific attributes
+  }];
+}
+
+
+def NodeCppNoInstanceDocs : Documentation {
+  let Category = DocCatNodeCpp;
+  let Content = [{
+This attribute is used on class / struct declaration to indicate that safe code 
+shouldn't be allowed to create instances of it.
+All instances are created by infraestructure only.
+}];
+}
+
+def NodeCppMayExtendDocs : Documentation {
+  let Category = DocCatNodeCpp;
+  let Content = [{
+This attribute is used on parameter declaration to indicate that lifetime
+of naked pointer arguments may be extended inside the function.
+Checker must add extra validations to such arguments.
+}];
+}
