@@ -842,6 +842,20 @@ bool MatchASTVisitor::TraverseDecl(Decl *DeclNode) {
   if (!DeclNode) {
     return true;
   }
+
+  //mb: we don't traverse decls in system-headers
+  if (!isa<TranslationUnitDecl>(DeclNode)) {
+
+    auto &SourceManager = getASTContext().getSourceManager();
+    auto ExpansionLoc = SourceManager.getExpansionLoc(DeclNode->getLocStart());
+    if (ExpansionLoc.isInvalid()) {
+      return true;
+    }
+    if (SourceManager.isInSystemHeader(ExpansionLoc)) {
+      return true;
+    }
+  }
+
   match(*DeclNode);
   return RecursiveASTVisitor<MatchASTVisitor>::TraverseDecl(DeclNode);
 }
