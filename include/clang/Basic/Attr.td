@@ -2971,3 +2971,16 @@ def InternalLinkage : InheritableAttr {
   let Subjects = SubjectList<[Var, Function, CXXRecord]>;
   let Documentation = [InternalLinkageDocs];
 }
+
+def NodeCppNoInstance : InheritableAttr {
+  let Spellings = [CXX11<"nodecpp","no_instance">];
+  let Subjects = SubjectList<[CXXRecord]>;
+  let Documentation = [NodeCppNoInstanceDocs];
+}
+
+def NodeCppMayExtend : InheritableParamAttr {
+  let Spellings = [CXX11<"nodecpp","may_extend">];
+  let Subjects = SubjectList<[ParmVar]>;
+  let Documentation = [NodeCppMayExtendDocs];
+}
+
