@@ -2978,9 +2978,9 @@ def NodeCppNoInstance : InheritableAttr {
   let Documentation = [NodeCppNoInstanceDocs];
 }
 
-def NodeCppMayExtend : InheritableParamAttr {
+def NodeCppMayExtend : InheritableAttr {
   let Spellings = [CXX11<"nodecpp","may_extend_to_this">];
-  let Subjects = SubjectList<[ParmVar]>;//TODO on cxx instance methods only
+  let Subjects = SubjectList<[Var]>;//TODO on cxx instance methods only
   let Documentation = [NodeCppMayExtendDocs];
 }
 
