@@ -4690,6 +4690,11 @@ static TypeSourceInfo *GetFullTypeForDeclarator(TypeProcessingState &state,
             HasAnyInterestingExtParameterInfos = true;
           }
 
+          if (Param->hasAttr<NodeCppMayExtendAttr>()) {
+            ExtParameterInfos[i] = ExtParameterInfos[i].withNodeCppMayExtend(true);
+            HasAnyInterestingExtParameterInfos = true;
+          }
+
           ParamTys.push_back(ParamTy);
         }
 

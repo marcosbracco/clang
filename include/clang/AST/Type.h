@@ -3456,6 +3456,7 @@ public:
       IsConsumed      = 0x10,
       HasPassObjSize  = 0x20,
       IsNoEscape      = 0x40,
+      IsMayExtend     = 0x80,
     };
     unsigned char Data = 0;
 
@@ -3506,6 +3507,19 @@ public:
         Copy.Data |= IsNoEscape;
       else
         Copy.Data &= ~IsNoEscape;
+      return Copy;
+    }
+
+    bool isNodeCppMayExtend() const {
+      return Data & IsMayExtend;
+    }
+
+    ExtParameterInfo withNodeCppMayExtend(bool MayExtend) const {
+      ExtParameterInfo Copy = *this;
+      if (MayExtend)
+        Copy.Data |= IsMayExtend;
+      else
+        Copy.Data &= ~IsMayExtend;
       return Copy;
     }
 

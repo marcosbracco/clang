@@ -2972,15 +2972,15 @@ def InternalLinkage : InheritableAttr {
   let Documentation = [InternalLinkageDocs];
 }
 
-def NodeCppNoInstance : InheritableAttr {
-  let Spellings = [CXX11<"nodecpp","no_instance">];
+def NodeCppNakedStruct : InheritableAttr {
+  let Spellings = [CXX11<"nodecpp","naked_struct">];
   let Subjects = SubjectList<[CXXRecord]>;
   let Documentation = [NodeCppNoInstanceDocs];
 }
 
 def NodeCppMayExtend : InheritableAttr {
   let Spellings = [CXX11<"nodecpp","may_extend_to_this">];
-  let Subjects = SubjectList<[Var]>;//TODO on cxx instance methods only
+  let Subjects = SubjectList<[Var]>;
   let Documentation = [NodeCppMayExtendDocs];
 }
 
