@@ -681,6 +681,8 @@ void TypePrinter::printFunctionProtoAfter(const FunctionProtoType *T,
       if (EPI.isConsumed()) OS << "__attribute__((ns_consumed)) ";
       if (EPI.isNoEscape())
         OS << "__attribute__((noescape)) ";
+      if (EPI.isNodeCppMayExtend())
+        OS << "[[nodecpp::may_extend_to_this]] ";
       auto ABI = EPI.getABI();
       if (ABI != ParameterABI::Ordinary)
         OS << "__attribute__((" << getParameterABISpelling(ABI) << ")) ";

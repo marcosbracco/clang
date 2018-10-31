@@ -14138,8 +14138,8 @@ bool Sema::CheckOverridingFunctionAttributes(const CXXMethodDecl *New,
   const auto *NewFT = New->getType()->getAs<FunctionProtoType>();
   const auto *OldFT = Old->getType()->getAs<FunctionProtoType>();
 
-  if (OldFT->hasExtParameterInfos()) {
-    for (unsigned I = 0, E = OldFT->getNumParams(); I != E; ++I)
+  if (OldFT->hasExtParameterInfos() || NewFT->hasExtParameterInfos()) {
+    for (unsigned I = 0, E = OldFT->getNumParams(); I != E; ++I) {
       // A parameter of the overriding method should be annotated with noescape
       // if the corresponding parameter of the overridden method is annotated.
       if (OldFT->getExtParameterInfo(I).isNoEscape() &&
@@ -14149,6 +14149,18 @@ bool Sema::CheckOverridingFunctionAttributes(const CXXMethodDecl *New,
         Diag(Old->getParamDecl(I)->getLocation(),
              diag::note_overridden_marked_noescape);
       }
+
+      if (!OldFT->getExtParameterInfo(I).isNodeCppMayExtend() &&
+          NewFT->getExtParameterInfo(I).isNodeCppMayExtend()) {
+        Diag(New->getParamDecl(I)->getLocation(),
+             diag::err_conflicting_overriding_cc_attributes)
+            << New->getDeclName() << New->getType() << Old->getType();
+        Diag(Old->getParamDecl(I)->getLocation(),
+             diag::note_overridden_virtual_function);
+
+        return true;
+      }
+    }
   }
 
   CallingConv NewCC = NewFT->getCallConv(), OldCC = OldFT->getCallConv();
