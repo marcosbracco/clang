@@ -6610,6 +6610,9 @@ static void ProcessDeclAttribute(Sema &S, Scope *scope, Decl *D,
   case AttributeList::AT_NodeCppMayExtend:
     handleSimpleAttribute<NodeCppMayExtendAttr>(S, D, Attr);
     break;
+  case AttributeList::AT_NodeCppOwnedByThis:
+    handleSimpleAttribute<NodeCppOwnedByThisAttr>(S, D, Attr);
+    break;
 
   }
 }
