@@ -2793,7 +2793,15 @@ def NodeCppNakedStruct : InheritableAttr {
 
 def NodeCppMayExtend : InheritableAttr {
   let Spellings = [CXX11<"nodecpp","may_extend_to_this">];
-  let Subjects = SubjectList<[Var]>;
+  let Subjects = SubjectList<[ParmVar]>;
   let Documentation = [NodeCppMayExtendDocs];
 }
+
+def NodeCppOwnedByThis : InheritableAttr {
+  let Spellings = [CXX11<"nodecpp","owned_by_this">];
+  let Subjects = SubjectList<[ParmVar]>;
+  let Documentation = [NodeCppMayExtendDocs];
+}
+
+
 
