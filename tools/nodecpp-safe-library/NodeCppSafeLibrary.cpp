@@ -162,11 +162,12 @@ int main(int argc, const char **argv) {
     // tool.appendArgumentsAdjuster(getInsertArgumentAdjuster(extraArgs,
     //     ArgumentInsertPosition::BEGIN));
 
-    RaiiStdioFile f(!OutputFilename.empty() ? fopen(OutputFilename.c_str(), "wb") : nullptr);
-    if (!OutputFilename.empty() && !f) {
+    const char* fname = !OutputFilename.empty() ? OutputFilename.c_str() : "safe_library.json";
+    RaiiStdioFile f(fopen(fname, "wb"));
+    if (!OutputFilename.empty() && !f.get()) {
         errs() << "Failed to open output file '" << OutputFilename.c_str() << "'\n";
         return 1;
     }
 
-    return tool.run(new FindNamedClassActionFactory(f));
+    return tool.run(new FindNamedClassActionFactory(f.get()));
 }

@@ -32,7 +32,7 @@ public:
     RaiiStdioFile(const RaiiStdioFile&) = delete;
     RaiiStdioFile& operator =(const RaiiStdioFile&) = delete;
 
-    operator FILE*() {
+    FILE* get() {
         return f;
     }
 };

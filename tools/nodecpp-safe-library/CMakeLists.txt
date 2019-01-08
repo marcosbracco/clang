@@ -9,7 +9,6 @@ set(LLVM_REQUIRES_RTTI 1)
 add_clang_executable(nodecpp-safe-library
   NodeCppSafeLibrary.cpp
   raiistdiofile.h
-  idl_tree.h
   )
 
 
