@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright (C) 2016 OLogN Technologies AG
+  Copyright (C) 2016 OLogN Technologies AG
 *******************************************************************************/
 
 #include "clang/AST/ASTConsumer.h"
