@@ -6604,14 +6604,14 @@ static void ProcessDeclAttribute(Sema &S, Scope *scope, Decl *D,
   case ParsedAttr::AT_XRayLogArgs:
     handleXRayLogArgsAttr(S, D, AL);
     break;
-  case AttributeList::AT_NodeCppNakedStruct:
-    handleSimpleAttribute<NodeCppNakedStructAttr>(S, D, Attr);
+  case ParsedAttr::AT_NodeCppNakedStruct:
+    handleSimpleAttribute<NodeCppNakedStructAttr>(S, D, AL);
     break;
-  case AttributeList::AT_NodeCppMayExtend:
-    handleSimpleAttribute<NodeCppMayExtendAttr>(S, D, Attr);
+  case ParsedAttr::AT_NodeCppMayExtend:
+    handleSimpleAttribute<NodeCppMayExtendAttr>(S, D, AL);
     break;
-  case AttributeList::AT_NodeCppOwnedByThis:
-    handleSimpleAttribute<NodeCppOwnedByThisAttr>(S, D, Attr);
+  case ParsedAttr::AT_NodeCppOwnedByThis:
+    handleSimpleAttribute<NodeCppOwnedByThisAttr>(S, D, AL);
     break;
 
   }
