@@ -36,6 +36,5 @@ docs/analyzer/_build
 # debug info testsuite
 test/debuginfo-tests
 
-# node-dot-cpp projects tracked independently
-tools/nodecpp-checker
-tools/nodecpp-safe-library
+# node-dot-cpp project tracked independently (clang-tools-nodecpp)
+tools/nodecpp
