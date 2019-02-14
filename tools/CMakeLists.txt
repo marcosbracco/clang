@@ -37,4 +37,4 @@ add_llvm_external_project(clang-tools-extra extra)
 add_clang_subdirectory(libclang)
 
 # Add nodecpp here, because using LLVM_EXTERNAL_PROJECTS don't seem to work
-add_llvm_external_project(nodecpp)
+add_llvm_external_project(checker)
