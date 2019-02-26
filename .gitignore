@@ -35,6 +35,3 @@ docs/_build
 docs/analyzer/_build
 # debug info testsuite
 test/debuginfo-tests
-
-# node-dot-cpp project tracked independently (clang-tools-nodecpp)
-tools/nodecpp
