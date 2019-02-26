@@ -2989,6 +2989,3 @@ def NodeCppOwnedByThis : InheritableAttr {
   let Subjects = SubjectList<[ParmVar]>;
   let Documentation = [NodeCppMayExtendDocs];
 }
-
-
-

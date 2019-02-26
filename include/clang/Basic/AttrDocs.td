@@ -3468,7 +3468,7 @@ Node-dot-cpp specific attributes
 def NodeCppNoInstanceDocs : Documentation {
   let Category = DocCatNodeCpp;
   let Content = [{
-This attribute is used on class / struct declaration to indicate that safe code 
+This attribute is used on class / struct declaration to indicate that safe code
 shouldn't be allowed to create instances of it.
 All instances are created by infraestructure only.
 }];
