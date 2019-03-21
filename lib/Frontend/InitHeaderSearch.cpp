@@ -488,6 +488,11 @@ void InitHeaderSearch::AddDefaultIncludePaths(const LangOptions &Lang,
           llvm::sys::path::append(P, "include", "c++", "v1");
           AddUnmappedPath(P, CXXSystem, false);
         }
+
+        if(!HasSysroot) {
+            AddUnmappedPath("/Library/Developer/CommandLineTools/usr/include/c++/v1", CXXSystem, false);
+            AddUnmappedPath("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include", CXXSystem, false);
+        }
       }
       AddPath("/usr/include/c++/v1", CXXSystem, false);
     } else {
