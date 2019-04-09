@@ -6111,6 +6111,18 @@ AST_MATCHER(FunctionDecl, hasTrailingReturn) {
   return false;
 }
 
+
+/// Matches coroutine body  statements.
+extern const internal::VariadicDynCastAllOfMatcher<Stmt, CoroutineBodyStmt>
+    coroutineBodyStmt;
+
+/// Matches a coroutine that has a given body.
+AST_MATCHER_P(CoroutineBodyStmt, hasCoroutineBody, internal::Matcher<Stmt>, InnerMatcher) {
+  const Stmt *const Statement = internal::GetBodyMatcher<CoroutineBodyStmt>::get(Node);
+  return (Statement != nullptr &&
+          InnerMatcher.matches(*Statement, Finder, Builder));
+}
+
 } // namespace ast_matchers
 } // namespace clang
 

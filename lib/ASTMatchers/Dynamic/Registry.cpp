@@ -486,6 +486,9 @@ RegistryMaps::RegistryMaps() {
   REGISTER_MATCHER(voidType);
   REGISTER_MATCHER(whileStmt);
   REGISTER_MATCHER(withInitializer);
+
+  REGISTER_MATCHER(coroutineBodyStmt);
+  REGISTER_MATCHER(hasCoroutineBody);
 }
 
 RegistryMaps::~RegistryMaps() = default;
