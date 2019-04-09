@@ -389,6 +389,7 @@ public:
   bool TraverseNestedNameSpecifier(NestedNameSpecifier *NNS);
   bool TraverseNestedNameSpecifierLoc(NestedNameSpecifierLoc NNS);
   bool TraverseConstructorInitializer(CXXCtorInitializer *CtorInit);
+  bool TraverseCoroutineBodyStmt(CoroutineBodyStmt *CoroBody);
 
   // Matches children or descendants of 'Node' with 'BaseMatcher'.
   bool memoizedMatchesRecursively(const ast_type_traits::DynTypedNode &Node,
@@ -913,6 +914,16 @@ bool MatchASTVisitor::TraverseConstructorInitializer(
 
   return RecursiveASTVisitor<MatchASTVisitor>::TraverseConstructorInitializer(
       CtorInit);
+}
+
+bool MatchASTVisitor::TraverseCoroutineBodyStmt(CoroutineBodyStmt *CoroBody) {
+  if (!CoroBody)
+    return true;
+
+  match(*CoroBody);
+
+  //mb:don't go into automatic coro stuff, only traverse the body
+  return RecursiveASTVisitor<MatchASTVisitor>::TraverseStmt(CoroBody->getBody());
 }
 
 class MatchASTConsumer : public ASTConsumer {
