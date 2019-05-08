@@ -194,6 +194,8 @@ protected:
     unsigned HasFoundDecl : 1;
     unsigned HadMultipleCandidates : 1;
     unsigned RefersToEnclosingVariableOrCapture : 1;
+    unsigned IsDezombifyCandidate : 1;
+    unsigned IsDezombifyNotReallyNeeded : 1;
   };
 
   class CastExprBitfields {
