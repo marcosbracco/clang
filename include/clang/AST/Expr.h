@@ -1031,6 +1031,9 @@ public:
     DeclRefExprBits.HadMultipleCandidates = 0;
     DeclRefExprBits.RefersToEnclosingVariableOrCapture =
         RefersToEnclosingVariableOrCapture;
+    DeclRefExprBits.IsDezombifyCandidate = 0;
+    DeclRefExprBits.IsDezombifyNotReallyNeeded = 0;
+
     computeDependence(D->getASTContext());
   }
 
