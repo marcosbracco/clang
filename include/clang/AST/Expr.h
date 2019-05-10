@@ -1031,8 +1031,7 @@ public:
     DeclRefExprBits.HadMultipleCandidates = 0;
     DeclRefExprBits.RefersToEnclosingVariableOrCapture =
         RefersToEnclosingVariableOrCapture;
-    DeclRefExprBits.IsDezombifyCandidate = 0;
-    DeclRefExprBits.IsDezombifyNotReallyNeeded = 0;
+    DeclRefExprBits.DezombifyFlags = 0;
 
     computeDependence(D->getASTContext());
   }
@@ -1190,28 +1189,28 @@ public:
   }
 
   /// Sets the flag telling whether this expression refers to
-  /// a variable of a type that may need to be dezombified.
-  void setIsDezombifyCandidate(bool V = true) {
-    DeclRefExprBits.IsDezombifyCandidate = V;
+  /// a variable of a type that has explicit dezombified.
+  void setDezombifyAlreadyPresent() {
+    DeclRefExprBits.DezombifyFlags = DezombifyAlreadyPresent;
   }
 
-  /// Does this DeclRefExpr refer to a varialbe that may need
-  /// to be dezombified
-  bool isDezombifyCandidate() const {
-    return DeclRefExprBits.IsDezombifyCandidate;
+  /// Sets the flag telling whether this expression refers to
+  /// a variable of a type that may need to be dezombified.
+  void setDezombifyCandidate() {
+    DeclRefExprBits.DezombifyFlags = DezombifyCandidate;
   }
 
   /// Sets the flag telling whether this expression refers to
   /// a variable of a type that may need to be dezombified,
   /// but a deeper flow analysis prove dezombified not really needed.
-  void setIsDezombifyNotReallyNeeded(bool V = true) {
-    DeclRefExprBits.IsDezombifyNotReallyNeeded = V;
+  void setDezombifyCandidateButRelaxed() {
+    DeclRefExprBits.DezombifyFlags = DezombifyCandidateButRelaxed;
   }
 
   /// Does this DeclRefExpr refer to a varialbe that really
   /// needs to be dezombified after all analysis stages.
-  bool isDezombifyReallyNeeded() const {
-    return DeclRefExprBits.IsDezombifyCandidate && !DeclRefExprBits.IsDezombifyNotReallyNeeded;
+  bool needsDezombifyInstrumentation() const {
+    return DeclRefExprBits.DezombifyFlags == DezombifyCandidate;
   }
 
   static bool classof(const Stmt *T) {

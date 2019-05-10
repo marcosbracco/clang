@@ -384,8 +384,7 @@ DeclRefExpr::DeclRefExpr(const ASTContext &Ctx,
         TemplateKWLoc);
   }
   DeclRefExprBits.HadMultipleCandidates = 0;
-  DeclRefExprBits.IsDezombifyCandidate = 0;
-  DeclRefExprBits.IsDezombifyNotReallyNeeded = 0;
+  DeclRefExprBits.DezombifyFlags = 0;
 
   computeDependence(Ctx);
 }

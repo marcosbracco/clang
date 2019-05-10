@@ -183,6 +183,14 @@ protected:
     unsigned IsType : 1; // true if operand is a type, false if an expression.
   };
 
+  enum DREDezombifyFlags {
+    NoDezombify = 0,
+    DezombifyAlreadyPresent,
+    DezombifyCandidate,
+    DezombifyCandidateButRelaxed
+  };
+
+
   class DeclRefExprBitfields {
     friend class ASTStmtReader; // deserialization
     friend class DeclRefExpr;
@@ -194,8 +202,7 @@ protected:
     unsigned HasFoundDecl : 1;
     unsigned HadMultipleCandidates : 1;
     unsigned RefersToEnclosingVariableOrCapture : 1;
-    unsigned IsDezombifyCandidate : 1;
-    unsigned IsDezombifyNotReallyNeeded : 1;
+    unsigned DezombifyFlags : 2;
   };
 
   class CastExprBitfields {
