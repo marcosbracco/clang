@@ -986,6 +986,7 @@ public:
 class CXXThisExpr : public Expr {
   SourceLocation Loc;
   bool Implicit : 1;
+  unsigned DezombiefyFlags :2;
 
 public:
   CXXThisExpr(SourceLocation L, QualType Type, bool isImplicit)
@@ -995,7 +996,7 @@ public:
              Type->isDependentType(), Type->isDependentType(),
              Type->isInstantiationDependentType(),
              /*ContainsUnexpandedParameterPack=*/false),
-        Loc(L), Implicit(isImplicit) {}
+        Loc(L), Implicit(isImplicit), DezombiefyFlags(0) {}
 
   CXXThisExpr(EmptyShell Empty) : Expr(CXXThisExprClass, Empty) {}
 
@@ -1009,6 +1010,31 @@ public:
 
   bool isImplicit() const { return Implicit; }
   void setImplicit(bool I) { Implicit = I; }
+
+  /// Sets the flag telling whether this expression refers to
+  /// a variable of a type that has explicit dezombified.
+  void setDezombiefyAlreadyPresent() {
+    DezombiefyFlags = DezombifyAlreadyPresent;
+  }
+
+  /// Sets the flag telling whether this expression refers to
+  /// a variable of a type that may need to be dezombified.
+  void setDezombiefyCandidate() {
+    DezombiefyFlags = DezombifyCandidate;
+  }
+
+  /// Sets the flag telling whether this expression refers to
+  /// a variable of a type that may need to be dezombified,
+  /// but a deeper flow analysis prove dezombified not really needed.
+  void setDezombiefyCandidateButRelaxed() {
+    DezombiefyFlags = DezombifyCandidateButRelaxed;
+  }
+
+  /// Does this DeclRefExpr refer to a varialbe that really
+  /// needs to be dezombified after all analysis stages.
+  bool needsDezombiefyInstrumentation() const {
+    return DezombiefyFlags == DezombifyCandidate;
+  }
 
   static bool classof(const Stmt *T) {
     return T->getStmtClass() == CXXThisExprClass;

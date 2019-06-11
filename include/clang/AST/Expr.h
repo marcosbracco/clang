@@ -1190,26 +1190,26 @@ public:
 
   /// Sets the flag telling whether this expression refers to
   /// a variable of a type that has explicit dezombified.
-  void setDezombifyAlreadyPresent() {
+  void setDezombiefyAlreadyPresent() {
     DeclRefExprBits.DezombifyFlags = DezombifyAlreadyPresent;
   }
 
   /// Sets the flag telling whether this expression refers to
   /// a variable of a type that may need to be dezombified.
-  void setDezombifyCandidate() {
+  void setDezombiefyCandidate() {
     DeclRefExprBits.DezombifyFlags = DezombifyCandidate;
   }
 
   /// Sets the flag telling whether this expression refers to
   /// a variable of a type that may need to be dezombified,
   /// but a deeper flow analysis prove dezombified not really needed.
-  void setDezombifyCandidateButRelaxed() {
+  void setDezombiefyCandidateButRelaxed() {
     DeclRefExprBits.DezombifyFlags = DezombifyCandidateButRelaxed;
   }
 
   /// Does this DeclRefExpr refer to a varialbe that really
   /// needs to be dezombified after all analysis stages.
-  bool needsDezombifyInstrumentation() const {
+  bool needsDezombiefyInstrumentation() const {
     return DeclRefExprBits.DezombifyFlags == DezombifyCandidate;
   }
 
